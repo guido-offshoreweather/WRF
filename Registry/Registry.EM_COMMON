@@ -221,8 +221,8 @@ state    real   w_subs_tend    |       dyn_em      1         -      i3rh      "W
 
 # Geopotential
 state    real   ph             ikjb     dyn_em      2         Z     \
-       irhusdf=(bdy_interp:dt)   "ph"   "perturbation geopotential"  "m2 s-2"
-state    real   phb            ikj     dyn_em      1         Z     irhdus "phb"  "base-state geopotential"  "m2 s-2"
+       irh02usdf=(bdy_interp:dt)   "ph"   "perturbation geopotential"  "m2 s-2"
+state    real   phb            ikj     dyn_em      1         Z     irh02dus "phb"  "base-state geopotential"  "m2 s-2"
 state    real   phb_fine       ikj     dyn_em      1         Z      -     "phb_fine"  "for nesting, temp holding interpolated coarse grid phb"  "m2 s-2"
 state    real   ph0            ikj     dyn_em      1         Z      r     "ph0"  "initial geopotential"     "m2 s-2"
 state    real   php            ikj     dyn_em      1         -      r     "php"  "geopotential"             "m2 s-2"
@@ -864,8 +864,8 @@ state    real   ACGRDFLX         ij     misc        1         -      rhdu       
 state    real   SFCEXC           ij     misc        1         -      r                                          "SFCEXC "          "SURFACE EXCHANGE COEFFICIENT"   "m s-1"
 
 state    real   ACSNOW           ij     misc        1         -      rd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)       "ACSNOW"           "ACCUMULATED SNOW"         "kg m-2"
-state    real   ACRUNOFF         ij     misc        1         -     irhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)       "ACRUNOFF"         "ACCUMULATED RUNOFF"       "kg m-2"
-state    real   ACSNOM           ij     misc        1         -      rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)       "ACSNOM"           "ACCUMULATED MELTED SNOW"  "kg m-2"
+state    real   ACRUNOFF         ij     misc        1         -     ird=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)       "ACRUNOFF"         "ACCUMULATED RUNOFF"       "kg m-2"
+state    real   ACSNOM           ij     misc        1         -      rd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)       "ACSNOM"           "ACCUMULATED MELTED SNOW"  "kg m-2"
 state    real   SNOW             ij     misc        1         -     i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)    "SNOW"             "SNOW WATER EQUIVALENT"    "kg m-2"
 state    real   SNOWH            ij     misc        1         -     i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)    "SNOWH"            "PHYSICAL SNOW DEPTH"      "m"
 
@@ -994,7 +994,7 @@ state    real      elon_track   -           misc        1        -     rh     "e
 state    real      elat_track   -           misc        1        -     rh     "elat_track"  "ECLIPSE LAT"     "degrees"
 
 # solar location variables from radiation driver
-state    real   COSZEN           ij     misc        1         -      rh      "COSZEN"  "COS of SOLAR ZENITH ANGLE"     "dimensionless"
+state    real   COSZEN           ij     misc        1         -      r      "COSZEN"  "COS of SOLAR ZENITH ANGLE"     "dimensionless"
 state    real   HRANG            ij     misc        1         -      r       "HRANG"   "SOLAR HOUR ANGLE"          "radians"
 state    real   DECLIN            -     misc        1         -      r       "DECLIN"  "SOLAR DECLINATION"         "radians"
 state    real   SOLCON            -     misc        1         -      r       "SOLCON"  "SOLAR CONSTANT"         "W m-2"
@@ -1020,11 +1020,11 @@ state    real   ALSWNIRDIF        ij    misc        1         Z      r        "A
 state    real   RA               ij     misc        1         -      r        "RA"           "AERODYNAMIC RESISTANCE"            "s m-1"
 state    real   RS               ij     misc        1         -      r        "RS"           "SURFACE RESISTANCE"                "s m-1"
 state    real   LAI              ij     misc        1         -      i0124rh  "LAI"          "LEAF AREA INDEX"                   "m-2/m-2"
-state    real   VEGF_PX          ij     misc        1         -      rh       "VEGF_PX"      "Vegetation Fraction for PX LSM"    "area/area"
+state    real   VEGF_PX          ij     misc        1         -      r       "VEGF_PX"      "Vegetation Fraction for PX LSM"    "area/area"
 state    real   T2OBS            ij     misc        1         -      r        "T2OBS"        "2-m temperature from analysis "    "K"
 state    real   Q2OBS            ij     misc        1         -      r        "Q2OBS"        "2-m mixing ratio from analysis "   "kg/kg"
-state    real   IMPERV           ij     misc        1         -      i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)      "IMPERV"       "Impervious surface fraction NLCD"  "percent"
-state    real   CANFRA           ij     misc        1         -      i012rhd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)      "CANFRA"       "Satellite canopy fraction"         "percent"
+state    real   IMPERV           ij     misc        1         -      i012rd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)      "IMPERV"       "Impervious surface fraction NLCD"  "percent"
+state    real   CANFRA           ij     misc        1         -      i012rd=(interp_mask_field:lu_index,iswater)u=(copy_fcnm)      "CANFRA"       "Satellite canopy fraction"         "percent"
 state    real   LAI_PX           ij     misc        1         -      rh        "LAI_PX"       "LAI used for PX LSM"              "m2/m2"
 state    real   WWLT_PX          ij     misc        1         -      rh       "WWLT_PX"       "Soil wilting point for PX LSM"    "m3/m3"
 state    real   WFC_PX           ij     misc        1         -      rh       "WFC_PX"        "Soil field capacity for PX LSM"    "m3/m3"
@@ -1583,7 +1583,7 @@ state    real  HAILNC           ij      misc        1         -      rhdu     "H
 state    real  SNOWNCV          ij      misc        1         -      r        "SNOWNCV"               "TIME-STEP NONCONVECTIVE SNOW AND ICE"                    "mm"
 state    real  GRAUPELNCV       ij      misc        1         -      r        "GRAUPELNCV"            "TIME-STEP NONCONVECTIVE GRAUPEL"                         "mm"
 state    real  HAILNCV          ij      misc        1         -      r        "HAILNCV"               "TIME-STEP NONCONVECTIVE HAIL"                            "mm"
-state    real  refl_10cm       ikj      dyn_em      1         -      hdu      "refl_10cm"             "Radar reflectivity (lamda = 10 cm)"  "dBZ"
+state    real  refl_10cm       ikj      dyn_em      1         -      h02du      "refl_10cm"             "Radar reflectivity (lamda = 10 cm)"  "dBZ"
 state    real  mskf_refl_10cm  ikj      dyn_em      1         -      hdu      "mskf_refl_10cm"        "Full Radar reflectivity (lamda = 10 cm)"  "dBZ"
 state    real    th_old          ikj      misc        1         -      rusd        "TH_OLD"              "Old Value of Th"   "K"
 state    real    qv_old          ikj      misc        1         -      rusd        "QV_OLD"              "Old Value of qv"   "kg kg-1"
