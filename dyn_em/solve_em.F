@@ -12,7 +12,7 @@ SUBROUTINE solve_em ( grid , config_flags  &
                  ,domain_get_current_time, domain_get_start_time                           &
                  ,domain_get_sim_start_time, domain_clock_get,is_alarm_tstep
    USE module_domain_type, ONLY : history_alarm, restart_alarm, auxinput4_alarm            &
-                 ,boundary_alarm
+                 ,boundary_alarm, auxhist2_alarm
    USE module_configure, ONLY : grid_config_rec_type
    USE module_driver_constants
    USE module_machine
@@ -311,6 +311,11 @@ SUBROUTINE solve_em ( grid , config_flags  &
       diag_flag = .true.
       ke_diag = min(k_end,kde-1) ! set depth to full domain for reflectivity field
    endif
+   ! domain added below to get 10min data working
+   if ( Is_alarm_tstep(grid%domain_clock, grid%alarms(AUXHIST2_ALARM)) ) then
+      diag_flag = .true.
+   endif
+
    IF (config_flags%nwp_diagnostics == 1) diag_flag = .true.
 
    grid%itimestep = grid%itimestep + 1
