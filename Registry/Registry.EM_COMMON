@@ -435,7 +435,7 @@ state   real    radtacttime    -        -         -         -     r         "rad
 state   real    bldtacttime    -        -         -         -     r         "bldtacttime"              "BLDTACTTIME"         "PBL   ACTIVATION TIME in s"
 state   real    cudtacttime    -        -         -         -     r         "cudtacttime"              "CUDTACTTIME"         "CPS   ACTIVATION TIME in s"
 state   real    ltngacttime    -        -         -         -     r         "ltngacttime"              "LTNGACTTIME"         "LTNG  ACTIVATION TIME in s"
-state   real    power          ij       misc      1         -     irh       "Power"                   "Power production"         "W"
+state   real    power          ij       misc      1         -     irh03       "Power"                   "Power production"         "W"
 
 
 # State for derived time quantities.  
